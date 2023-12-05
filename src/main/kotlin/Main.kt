@@ -1,7 +1,9 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import core.parser.extractor.Extractor
+import core.parser.extractor.ParamsExtractor
+import model.command.param.Param
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    val paramsExtractor: Extractor<List<Param>, String> = ParamsExtractor()
+
+    println(paramsExtractor.extract("find -f cieply"))
 }
