@@ -1,12 +1,13 @@
 package model.command
 
-import model.command.action.IAction
+import core.action.IAction
 import model.command.param.IParam
 
-class Command(
+open class Command(
     var name: String,
-    var iParams: List<IParam>,
-    var action: IAction
+    var iParams: List<IParam>
 ) {
-
+    override fun toString(): String {
+        return "Command(name='$name', iParams=$iParams)"
+    }
 }

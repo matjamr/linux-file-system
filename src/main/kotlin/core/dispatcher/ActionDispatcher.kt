@@ -1,6 +1,6 @@
 package core.dispatcher
 
-import model.command.action.IAction
+import core.action.IAction
 import java.lang.RuntimeException
 
 class ActionDispatcher(

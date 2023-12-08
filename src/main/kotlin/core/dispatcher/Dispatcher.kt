@@ -1,6 +1,6 @@
 package core.dispatcher
 
-import model.command.action.IAction
+import core.action.IAction
 
 interface Dispatcher {
     fun dispatch(commandName: String): IAction
