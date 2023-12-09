@@ -9,6 +9,7 @@ class Context(
     lateinit var currentUser: User
     var abortFlag: Boolean = false
     lateinit var currentNode: INode
+    lateinit var rootNode: INode
     lateinit var input: String
     lateinit var currentCatalog: Catalog
 }

@@ -35,17 +35,21 @@ enum class SupportedCommands(var commandName: String,
         LsParser(IsPathPredicate())
     ),
     MV("mv", ArrayList(), MvAction(), MvParser()),
-//    RM("rm"),
-//    RM_DIR("rmdir"),
-//    TOUCH("touch"),
     CD(
         "cd",
         emptyList(),
-        CdAction(),
+        CdAction(PathResolver()),
         CdParser()
     );
 
-    fun getParamNames(): List<String> = iParams.stream().map { it.getName() }.toList()
+    //    RM("rm"),
+//    RM_DIR("rmdir"),
+//    TOUCH("touch"),
+
+    fun getParamNames(): List<String> = iParams.stream()
+        .map { it.getName() }
+        .toList()
+
     fun findParamByName(paramName: String): IParam<Catalog> = iParams.stream()
         .filter { it.getName() == paramName }
         .findFirst()
