@@ -1,6 +1,6 @@
 package core.processor
 
-import model.Context
+import model.context.Context
 
 interface Processor {
     fun process(context: Context)

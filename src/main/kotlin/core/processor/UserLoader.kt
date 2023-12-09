@@ -1,7 +1,7 @@
 package core.processor
 
-import model.Context
-import model.User
+import model.context.Context
+import model.user.User
 
 class UserLoader: Processor {
     override fun process(context: Context) {

@@ -1,10 +1,13 @@
 package model.command.param
 
-interface IParam {
+import core.action.Runnable
+import model.node.INode
+
+interface IParam<T:INode> {
     fun getName(): String
     fun getContent(): String?
     fun getDescription(): String
     fun mandatoryContent(): Boolean
-    fun getRunnable(): Runnable
+    fun getRunnable(): Runnable<T>
 
 }

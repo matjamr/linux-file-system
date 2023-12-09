@@ -3,27 +3,23 @@ import core.engine.IEngine
 import core.extractor.CommandNameExtractor
 import core.extractor.Extractor
 import core.processor.*
-import model.memento.Catalog
-import model.node.Node
+import model.node.Catalog
+import model.node.File
 
 fun main() {
-    var root: Node = Node(null, "/")
-    var dev: Node = Node(root, "dev")
-    var usr: Node = Node(root, "usr")
-    var andrzejFolder: Node = Node(usr, "andzej")
-    var admin: Node = Node(usr, "admin")
-    var docs: Node = Node(root, "docs")
-    var filtxx: Node = Node(docs, "filetxx")
+    var rootCatalog: Catalog = Catalog("/", null, mutableListOf())
+    var devCatalog: Catalog = Catalog("dev", rootCatalog, mutableListOf())
+    var usrCatalog: Catalog = Catalog("usr", rootCatalog, mutableListOf())
+    var adminCatalog: Catalog = Catalog("admin", usrCatalog, mutableListOf())
+    var docsCatalog: Catalog = Catalog("docs", rootCatalog, mutableListOf())
+    var fileDotXX: File = File("file.xx", docsCatalog, "Some Content")
 
-    var initStateCatalog: Catalog = Catalog(mutableListOf(
-        root,
-        dev,
-        usr,
-        admin,
-        docs,
-        filtxx,
-        andrzejFolder
-    ))
+    docsCatalog.add(fileDotXX)
+    usrCatalog.add(adminCatalog)
+    rootCatalog.add(devCatalog)
+    rootCatalog.add(usrCatalog)
+    rootCatalog.add(docsCatalog)
+
 
     val extractor: Extractor<String, String> = CommandNameExtractor()
 
@@ -39,7 +35,7 @@ fun main() {
         commandProcessor
     ))
 
-    iEngine.init(initStateCatalog)
-    iEngine.run()
+    iEngine.init(rootCatalog)
+        .run()
 }
 

@@ -1,21 +1,25 @@
 package core.engine
 
 import core.processor.Processor
-import core.util.node.NodeFinder
-import model.Context
-import model.memento.Catalog
+import model.context.Context
+import model.node.Catalog
 
 class Engine(
     private var processorChain: List<Processor>
 ): IEngine {
     lateinit var context: Context
-    override fun init(catalog: Catalog) {
-        context = Context(catalog)
+    override fun init(rootCatalog: Catalog): IEngine {
+        context = Context()
+        context.currentCatalog = rootCatalog
+
+        return this
     }
 
-    override fun run() {
+    override fun run(): IEngine {
         while(!context.abortFlag) {
             processorChain.stream().forEach { it.process(context) }
         }
+
+        return this
     }
 }

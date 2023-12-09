@@ -1,42 +1,50 @@
 package core.parser
 
+import core.predicate.IsPathPredicate
 import model.command.Command
 import model.command.LsCommand
 import model.command.SupportedCommands.LS
 import model.command.param.IParam
 import model.command.param.Param
+import model.node.Catalog
 import java.lang.RuntimeException
+import java.util.function.Predicate
 
-class LsParser : Parser {
+class LsParser(
+    private val isPathPredicate: Predicate<String>
+) : Parser {
 
     override fun parse(command: String): Command {
-        val actualParamNames: MutableList<IParam> = mutableListOf()
-        var tmpParam: IParam? = null
+        val actualParamNames: MutableList<IParam<Catalog>> = mutableListOf()
+        var tmpParam: IParam<Catalog>? = null
         val splittedCommand: List<String> = command.split(" ")
         val preparedSplittedCommand = splittedCommand.stream()
             .skip(1)
             .toList()
 
         val paths: MutableList<String> = mutableListOf()
-        val pathRegex = Regex("^(\\.|\\.\\.)?/?(/([a-zA-Z0-9_-]+/)*[a-zA-Z0-9_-]+/?)?\$")
 
         for(part: String in preparedSplittedCommand) {
-            try {
+            if(part.startsWith("-")) {
                 tmpParam = LS.findParamByName(part)
-            } catch (e: RuntimeException) {
-                if (pathRegex.matches(part)) {
-                    paths.add(part)
-                } else {
-                    throw e
-                }
+            } else {
+                paths.add(part)
             }
 
-            actualParamNames.add(Param(tmpParam!!.getName(),
-                null,
-                tmpParam.getRunnable(),
-                tmpParam.getDescription(),
-                false
-            ))
+            if(tmpParam != null) {
+                actualParamNames.add(Param(
+                    tmpParam.getName(),
+                    null,
+                    tmpParam.getRunnable(),
+                    tmpParam.getDescription(),
+                    false
+                ))
+            }
+
+        }
+
+        if (paths.isEmpty()) {
+            paths.add(".")
         }
 
         return LsCommand(

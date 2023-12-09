@@ -1,14 +1,13 @@
 package model.node
 
 import model.memento.Memento
-
-class Node(
-    private var parent: Node?,
+abstract class Node(
+    private var parent: INode?,
     private var name: String
 ) : INode {
     override fun getName(): String = name
 
-    override fun getParent(): Node? = parent
+    override fun getParent(): INode? = parent
 
     override fun hasParent(): Boolean = parent == null
 

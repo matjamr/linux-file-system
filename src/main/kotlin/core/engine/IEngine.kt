@@ -1,10 +1,9 @@
 package core.engine
 
-import model.Context
-import model.memento.Catalog
+import model.node.Catalog
 
 interface IEngine {
-    fun init(catalog: Catalog)
+    fun init(rootCatalog: Catalog): IEngine
 
-    fun run()
+    fun run(): IEngine
 }

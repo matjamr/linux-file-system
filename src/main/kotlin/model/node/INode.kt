@@ -4,7 +4,7 @@ import model.memento.Memento
 
 interface INode {
     fun getName(): String
-    fun getParent(): Node?
+    fun getParent(): INode?
     fun hasParent(): Boolean
     fun clone(): Nothing
     fun createMemento(): Memento

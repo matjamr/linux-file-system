@@ -1,14 +1,14 @@
-package model
+package model.context
 
-import model.memento.Catalog
+import model.node.Catalog
 import model.node.INode
-import model.node.Node
+import model.user.User
 
 class Context(
-    val catalog: Catalog
 ) {
     lateinit var currentUser: User
     var abortFlag: Boolean = false
     lateinit var currentNode: INode
     lateinit var input: String
+    lateinit var currentCatalog: Catalog
 }
