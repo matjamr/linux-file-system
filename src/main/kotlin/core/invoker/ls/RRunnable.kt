@@ -1,6 +1,6 @@
-package core.action.ls
+package core.invoker.ls
 
-import core.action.Runnable
+import core.invoker.Runnable
 import model.node.Catalog
 
 class RRunnable: Runnable<Catalog> {

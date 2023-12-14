@@ -1,5 +1,6 @@
 package model.context
 
+import model.memento.MementoCollection
 import model.node.Catalog
 import model.node.INode
 import model.user.User
@@ -12,4 +13,5 @@ class Context(
     lateinit var rootNode: INode
     lateinit var input: String
     lateinit var currentCatalog: Catalog
+    lateinit var mementoCollection: MementoCollection
 }

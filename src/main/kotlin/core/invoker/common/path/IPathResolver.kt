@@ -1,4 +1,4 @@
-package core.action.common.path
+package core.invoker.common.path
 
 import model.node.INode
 import javax.naming.Context

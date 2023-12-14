@@ -6,7 +6,7 @@ interface INode {
     fun getName(): String
     fun getParent(): INode?
     fun hasParent(): Boolean
-    fun clone(): Nothing
+    fun clone(): INode
     fun createMemento(): Memento
-    fun restore(): Memento
+    fun restore(memento: Memento)
 }

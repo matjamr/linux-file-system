@@ -1,15 +1,15 @@
-package core.action.cd
+package core.invoker.cd
 
-import core.action.IAction
-import core.action.common.path.PathResolver
+import core.invoker.Invoker
+import core.invoker.common.path.PathResolver
 import model.context.Context
 import model.command.CdCommand
 import model.command.Command
 import model.node.Catalog
 
-class CdAction(
+class CdInvoker(
     private val pathResolver: PathResolver
-): IAction {
+): Invoker {
 
     override fun run(command: Command, context: Context) {
         val cdCommand: CdCommand = command as CdCommand

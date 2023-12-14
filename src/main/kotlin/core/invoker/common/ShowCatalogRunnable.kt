@@ -1,6 +1,6 @@
-package core.action.common
+package core.invoker.common
 
-import core.action.Runnable
+import core.invoker.Runnable
 import model.node.Catalog
 
 class ShowCatalogRunnable: Runnable<Catalog> {

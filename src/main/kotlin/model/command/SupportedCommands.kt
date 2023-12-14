@@ -1,15 +1,14 @@
 package model.command
 
 import core.parser.Parser
-import core.action.IAction
-import core.action.cd.CdAction
-import core.action.common.ShowCatalogRunnable
-import core.action.common.path.PathResolver
-import core.action.ls.ARunnable
-import core.action.ls.LRunnable
-import core.action.ls.LsAction
-import core.action.ls.RRunnable
-import core.action.mv.MvAction
+import core.invoker.Invoker
+import core.invoker.cd.CdInvoker
+import core.invoker.common.path.PathResolver
+import core.invoker.ls.ARunnable
+import core.invoker.ls.LRunnable
+import core.invoker.ls.LsInvoker
+import core.invoker.ls.RRunnable
+import core.invoker.mv.MvInvoker
 import core.parser.CdParser
 import core.parser.LsParser
 import core.parser.MvParser
@@ -21,7 +20,7 @@ import java.lang.RuntimeException
 
 enum class SupportedCommands(var commandName: String,
                              var iParams: List<IParam<Catalog>>,
-                             var action: IAction,
+                             var action: Invoker,
                              var parser: Parser
 ) {
     LS(
@@ -31,14 +30,14 @@ enum class SupportedCommands(var commandName: String,
             Param("-a", null, LRunnable(),"Include directory entries whose names begin with a dot (‘.’) except for . and ...  Automatically set for the super-user unless -I is specified."),
             Param("-r", null, RRunnable(),"Recursively print all subdirectories")
         ),
-        LsAction(PathResolver()),
+        LsInvoker(PathResolver()),
         LsParser(IsPathPredicate())
     ),
-    MV("mv", ArrayList(), MvAction(), MvParser()),
+    MV("mv", ArrayList(), MvInvoker(), MvParser()),
     CD(
         "cd",
         emptyList(),
-        CdAction(PathResolver()),
+        CdInvoker(PathResolver()),
         CdParser()
     );
 

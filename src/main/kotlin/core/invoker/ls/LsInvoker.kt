@@ -1,15 +1,15 @@
-package core.action.ls
+package core.invoker.ls
 
-import core.action.IAction
-import core.action.common.path.PathResolver
+import core.invoker.Invoker
+import core.invoker.common.path.PathResolver
 import model.context.Context
 import model.command.Command
 import model.command.LsCommand
 import model.node.Catalog
 
-class LsAction(
+class LsInvoker(
     private val pathResolver: PathResolver
-) : IAction {
+) : Invoker {
     override fun run(command: Command, context: Context) {
         val lsCommand = command as LsCommand
 

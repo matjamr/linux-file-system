@@ -1,10 +1,10 @@
-package core.action.mv
+package core.invoker.mv
 
-import core.action.IAction
+import core.invoker.Invoker
 import model.context.Context
 import model.command.Command
 
-class MvAction : IAction {
+class MvInvoker : Invoker {
     override fun run(command: Command, context: Context) {
         println(command)
     }

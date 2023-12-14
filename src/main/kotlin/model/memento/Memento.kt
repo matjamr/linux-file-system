@@ -1,6 +1,6 @@
 package model.memento
 
-import model.node.Node
+import model.node.INode
 
-class Memento(num: Int, parentNode: Node) {
+class Memento(name: String, parentNode: INode?) {
 }

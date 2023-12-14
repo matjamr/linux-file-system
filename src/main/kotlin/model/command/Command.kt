@@ -1,6 +1,5 @@
 package model.command
 
-import core.action.IAction
 import model.command.param.IParam
 import model.node.Catalog
 

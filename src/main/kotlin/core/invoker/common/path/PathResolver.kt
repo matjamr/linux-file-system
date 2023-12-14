@@ -1,4 +1,4 @@
-package core.action.common.path
+package core.invoker.common.path
 
 import model.context.Context
 import model.node.Catalog

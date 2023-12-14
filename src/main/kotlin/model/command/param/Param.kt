@@ -1,9 +1,6 @@
 package model.command.param
 
-import core.action.IAction
-import core.action.Runnable
-import lombok.ToString
-import model.command.Command
+import core.invoker.Runnable
 import model.node.INode
 
 

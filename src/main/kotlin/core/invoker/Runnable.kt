@@ -1,6 +1,5 @@
-package core.action
+package core.invoker
 
-import model.node.Catalog
 import model.node.INode
 
 interface Runnable<T : INode> {

@@ -1,6 +1,6 @@
 package model.command.param
 
-import core.action.Runnable
+import core.invoker.Runnable
 import model.node.INode
 
 interface IParam<T:INode> {
