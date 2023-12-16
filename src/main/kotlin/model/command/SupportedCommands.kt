@@ -33,7 +33,7 @@ enum class SupportedCommands(var commandName: String,
         LsInvoker(PathResolver()),
         LsParser(IsPathPredicate())
     ),
-    MV("mv", ArrayList(), MvInvoker(), MvParser()),
+    MV("mv", ArrayList(), MvInvoker(PathResolver()), MvParser()),
     CD(
         "cd",
         emptyList(),

@@ -9,4 +9,5 @@ interface INode {
     fun clone(): INode
     fun createMemento(): Memento
     fun restore(memento: Memento)
+    fun setName(name: String)
 }

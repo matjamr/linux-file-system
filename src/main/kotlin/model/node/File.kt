@@ -15,13 +15,15 @@ class File(
         return File(this)
     }
 
-
-
     override fun createMemento(): Memento {
         TODO("Not yet implemented")
     }
 
     override fun restore(memento: Memento) {
         TODO("Not yet implemented")
+    }
+
+    override fun setName(name: String) {
+        this.name = name
     }
 }

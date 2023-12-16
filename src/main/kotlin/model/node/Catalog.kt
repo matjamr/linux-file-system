@@ -10,9 +10,12 @@ class Catalog(private var name_: String,
     : Node(parent_, name_) {
 
 
+
     override fun clone(): Catalog {
         return Catalog(this)
     }
+
+    override fun getName(): String = name_
 
     constructor(catalog: Catalog) : this(catalog.name_, catalog.parent_, catalog.childrenNodes)
 
@@ -24,12 +27,20 @@ class Catalog(private var name_: String,
         TODO("Not yet implemented")
     }
 
-    fun findByName(name: String): Catalog = childrenNodes.stream()
-        .filter { it is Catalog }
+    override fun setName(name: String) {
+        this.name_ = name
+    }
+
+    fun findByName(name: String): Optional<INode> = childrenNodes.stream()
         .filter { it.getName() == name }
         .findFirst()
-        .map { it as Catalog }
-        .orElseThrow { throw RuntimeException("There is no catalog with given name $name") }
+
+    fun findFileByName(name: String): Optional<File> = childrenNodes.stream()
+        .filter { it is File }
+        .filter { it.getName() == name }
+        .map { it as File }
+        .findFirst()
+
 
     fun add(node: INode) {
         if (childrenNodes.contains(node)) {
