@@ -9,11 +9,14 @@ abstract class Node(
 ) : INode {
     override fun getName(): String = name
 
+    override fun setName(name: String) {
+        this.name = name
+    }
+
     override fun getParent(): INode? = parent
 
     override fun hasParent(): Boolean = parent == null
 
     override fun toString(): String = name
-
 
 }

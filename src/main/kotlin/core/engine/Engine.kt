@@ -10,14 +10,19 @@ class Engine(
     lateinit var context: Context
     override fun init(rootCatalog: Catalog): IEngine {
         context = Context()
-        context.currentCatalog = rootCatalog
+        context.currentNode = rootCatalog
+        context.rootNode = rootCatalog
 
         return this
     }
 
     override fun run(): IEngine {
         while(!context.abortFlag) {
-            processorChain.stream().forEach { it.process(context) }
+            try {
+                processorChain.stream().forEach { it.process(context) }
+            } catch (e: RuntimeException) {
+                println("\n\t${e.message}\n\n")
+            }
         }
 
         return this

@@ -1,17 +1,17 @@
 package model.command
 
-import core.parser.Parser
 import core.invoker.Invoker
 import core.invoker.cd.CdInvoker
-import core.invoker.common.path.PathResolver
+import core.invoker.common.path.PathResolver2
+import core.invoker.cp.CpInvoker
 import core.invoker.ls.ARunnable
 import core.invoker.ls.LRunnable
 import core.invoker.ls.LsInvoker
 import core.invoker.ls.RRunnable
+import core.invoker.more.MoreInvoker
 import core.invoker.mv.MvInvoker
-import core.parser.CdParser
-import core.parser.LsParser
-import core.parser.MvParser
+import core.invoker.touch.TouchInvoker
+import core.parser.*
 import core.predicate.IsPathPredicate
 import model.command.param.IParam
 import model.command.param.Param
@@ -30,16 +30,35 @@ enum class SupportedCommands(var commandName: String,
             Param("-a", null, LRunnable(),"Include directory entries whose names begin with a dot (‘.’) except for . and ...  Automatically set for the super-user unless -I is specified."),
             Param("-r", null, RRunnable(),"Recursively print all subdirectories")
         ),
-        LsInvoker(PathResolver()),
+        LsInvoker(PathResolver2()),
         LsParser(IsPathPredicate())
     ),
-    MV("mv", ArrayList(), MvInvoker(PathResolver()), MvParser()),
+    MV("mv", ArrayList(), MvInvoker(PathResolver2()), MvParser()),
     CD(
         "cd",
         emptyList(),
-        CdInvoker(PathResolver()),
+        CdInvoker(PathResolver2()),
         CdParser()
-    );
+    ),
+    CP(
+        "cp",
+        emptyList(),
+        CpInvoker(PathResolver2()),
+        CpParser()
+    ),
+    TOUCH(
+        "touch",
+        emptyList(),
+        TouchInvoker(PathResolver2()),
+        TouchParser()
+    ),
+    MORE(
+        "more",
+        emptyList(),
+        MoreInvoker(PathResolver2()),
+        MoreParser()
+    )
+    ;
 
     //    RM("rm"),
 //    RM_DIR("rmdir"),

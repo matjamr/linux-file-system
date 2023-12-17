@@ -22,8 +22,4 @@ class File(
     override fun restore(memento: Memento) {
         TODO("Not yet implemented")
     }
-
-    override fun setName(name: String) {
-        this.name = name
-    }
 }

@@ -12,6 +12,5 @@ class Context(
     lateinit var currentNode: INode
     lateinit var rootNode: INode
     lateinit var input: String
-    lateinit var currentCatalog: Catalog
     lateinit var mementoCollection: MementoCollection
 }
