@@ -13,7 +13,7 @@ fun main() {
     var usrCatalog: Catalog = Catalog("usr", rootCatalog, mutableListOf())
     var adminCatalog: Catalog = Catalog("admin", usrCatalog, mutableListOf())
     var docsCatalog: Catalog = Catalog("docs", rootCatalog, mutableListOf())
-    var fileDotXX: File = File("file.xx", docsCatalog, Faker().lorem().sentence(200))
+    var fileDotXX: File = File("file.xx", docsCatalog, Faker().lorem().sentence(1000))
 
     docsCatalog.add(fileDotXX)
     usrCatalog.add(adminCatalog)

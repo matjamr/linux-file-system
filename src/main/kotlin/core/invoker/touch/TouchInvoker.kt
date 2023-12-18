@@ -19,7 +19,7 @@ class TouchInvoker(
 
         if(touchCommand.fileLocations.size == 1) {
             val toDir: Catalog = pathResolver.resolve("./"+touchCommand.fileLocations[0].getLastPart(), context, ConditionalFileProvider()) as Catalog
-            toDir.childrenNodes.add(File(touchCommand.fileLocations[0].getLastPart(), toDir, Faker().lorem().sentence(200)))
+            toDir.childrenNodes.add(File(touchCommand.fileLocations[0].getLastPart(), toDir, Faker().lorem().sentence(1000)))
         }
 
         for (newFileLocation in touchCommand.fileLocations) {
@@ -28,7 +28,7 @@ class TouchInvoker(
             if(toDir.findByName(newFileLocation.getLastPart()).isPresent)
                 throw RuntimeException("node with given name already exists")
 
-            toDir.childrenNodes.add(File(newFileLocation.getLastPart(), toDir, Faker().lorem().sentence(200)))
+            toDir.childrenNodes.add(File(newFileLocation.getLastPart(), toDir, Faker().lorem().sentence(1000)))
         }
     }
 }

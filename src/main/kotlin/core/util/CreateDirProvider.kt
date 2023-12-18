@@ -15,7 +15,7 @@ class CreateDirProvider: Provider {
         val tmpNode: INode = if(node is Catalog) {
             Catalog(nodeName, node, (from as Catalog).childrenNodes)
         } else {
-            File(nodeName, node, Faker().lorem().sentence(200))
+            File(nodeName, node, Faker().lorem().sentence(1000))
         }
 
         (node as Catalog).childrenNodes.add(tmpNode)
