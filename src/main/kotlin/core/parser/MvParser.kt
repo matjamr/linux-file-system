@@ -1,8 +1,9 @@
 package core.parser
 
 import model.command.Command
-import model.command.MvCommand
-import model.command.SupportedCommands
+import model.command.mv.MvCommand
+import model.path.Path
+import model.path.PathProxy
 import java.lang.RuntimeException
 
 class MvParser : Parser {
@@ -22,8 +23,8 @@ class MvParser : Parser {
 
         return MvCommand(
             "mv",
-            from,
-            to
+            PathProxy(Path(from)),
+            PathProxy(Path(to))
         )
     }
 }

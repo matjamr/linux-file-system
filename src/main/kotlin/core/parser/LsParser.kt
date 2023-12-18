@@ -1,13 +1,14 @@
 package core.parser
 
-import core.predicate.IsPathPredicate
 import model.command.Command
-import model.command.LsCommand
+import model.command.ls.LsCommand
 import model.command.SupportedCommands.LS
 import model.command.param.IParam
 import model.command.param.Param
 import model.node.Catalog
-import java.lang.RuntimeException
+import model.path.IPath
+import model.path.Path
+import model.path.PathProxy
 import java.util.function.Predicate
 
 class LsParser(
@@ -22,13 +23,13 @@ class LsParser(
             .skip(1)
             .toList()
 
-        val paths: MutableList<String> = mutableListOf()
+        val paths: MutableList<IPath> = mutableListOf()
 
         for(part: String in preparedSplittedCommand) {
             if(part.startsWith("-")) {
                 tmpParam = LS.findParamByName(part)
             } else {
-                paths.add(part)
+                paths.add(PathProxy(Path(part)))
             }
 
             if(tmpParam != null) {
@@ -44,7 +45,7 @@ class LsParser(
         }
 
         if (paths.isEmpty()) {
-            paths.add(".")
+            paths.add(PathProxy(Path(("."))))
         }
 
         return LsCommand(

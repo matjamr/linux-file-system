@@ -2,6 +2,7 @@ package model.command
 
 import core.invoker.Invoker
 import core.invoker.cd.CdInvoker
+import core.invoker.cd.CdProxy
 import core.invoker.common.path.PathResolver2
 import core.invoker.cp.CpInvoker
 import core.invoker.ls.ARunnable
@@ -9,8 +10,11 @@ import core.invoker.ls.LRunnable
 import core.invoker.ls.LsInvoker
 import core.invoker.ls.RRunnable
 import core.invoker.more.MoreInvoker
+import core.invoker.more.MoreProxy
 import core.invoker.mv.MvInvoker
+import core.invoker.mv.MvProxy
 import core.invoker.touch.TouchInvoker
+import core.invoker.touch.TouchProxy
 import core.parser.*
 import core.predicate.IsPathPredicate
 import model.command.param.IParam
@@ -33,11 +37,11 @@ enum class SupportedCommands(var commandName: String,
         LsInvoker(PathResolver2()),
         LsParser(IsPathPredicate())
     ),
-    MV("mv", ArrayList(), MvInvoker(PathResolver2()), MvParser()),
+    MV("mv", ArrayList(), MvProxy(MvInvoker(PathResolver2()), PathResolver2()), MvParser()),
     CD(
         "cd",
         emptyList(),
-        CdInvoker(PathResolver2()),
+        CdProxy(CdInvoker(PathResolver2()), PathResolver2()),
         CdParser()
     ),
     CP(
@@ -49,13 +53,13 @@ enum class SupportedCommands(var commandName: String,
     TOUCH(
         "touch",
         emptyList(),
-        TouchInvoker(PathResolver2()),
+        TouchProxy(TouchInvoker(PathResolver2()), PathResolver2()),
         TouchParser()
     ),
     MORE(
         "more",
         emptyList(),
-        MoreInvoker(PathResolver2()),
+        MoreProxy(MoreInvoker(PathResolver2()), PathResolver2()),
         MoreParser()
     )
     ;

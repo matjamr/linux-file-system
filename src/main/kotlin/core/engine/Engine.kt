@@ -22,6 +22,7 @@ class Engine(
                 processorChain.stream().forEach { it.process(context) }
             } catch (e: RuntimeException) {
                 println("\n\t${e.message}\n\n")
+                e.printStackTrace()
             }
         }
 

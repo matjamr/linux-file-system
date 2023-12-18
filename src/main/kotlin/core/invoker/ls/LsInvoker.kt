@@ -5,8 +5,9 @@ import core.invoker.common.path.PathResolver2
 import core.util.InvalidPathProvider
 import model.context.Context
 import model.command.Command
-import model.command.LsCommand
+import model.command.ls.LsCommand
 import model.node.Catalog
+import model.path.IPath
 
 class LsInvoker(
     private val pathResolver: PathResolver2
@@ -19,11 +20,12 @@ class LsInvoker(
 
     }
 
-    private fun showPath(it: String, context: Context) {
-        val tmpCatalog: Catalog = pathResolver.resolve(it, context, InvalidPathProvider()) as Catalog
+    private fun showPath(it: IPath, context: Context) {
+        val tmpCatalog: Catalog = pathResolver.resolve(it.getPath(), context, InvalidPathProvider()) as Catalog
 
+        println("$tmpCatalog")
         tmpCatalog.childrenNodes.stream()
-            .forEach { print("\t${it.getName()}") }
+            .forEach { println("\t${it.getName()}") }
 
         println()
     }

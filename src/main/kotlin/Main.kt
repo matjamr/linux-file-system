@@ -1,3 +1,4 @@
+import com.github.javafaker.Faker
 import core.engine.Engine
 import core.engine.IEngine
 import core.extractor.CommandNameExtractor
@@ -12,7 +13,7 @@ fun main() {
     var usrCatalog: Catalog = Catalog("usr", rootCatalog, mutableListOf())
     var adminCatalog: Catalog = Catalog("admin", usrCatalog, mutableListOf())
     var docsCatalog: Catalog = Catalog("docs", rootCatalog, mutableListOf())
-    var fileDotXX: File = File("file.xx", docsCatalog, "Some Content")
+    var fileDotXX: File = File("file.xx", docsCatalog, Faker().lorem().sentence(200))
 
     docsCatalog.add(fileDotXX)
     usrCatalog.add(adminCatalog)

@@ -3,7 +3,7 @@ package model.command
 import model.command.param.IParam
 import model.node.Catalog
 
-open class Command(
+abstract class Command(
     var name: String,
     var iParams: List<IParam<Catalog>>
 ) {

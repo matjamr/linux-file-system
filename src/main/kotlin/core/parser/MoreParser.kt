@@ -1,11 +1,10 @@
 package core.parser
 
-import model.command.CdCommand
 import model.command.Command
-import model.command.MoreCommand
-import model.command.SupportedCommands.CD
+import model.command.more.MoreCommand
+import model.path.Path
+import model.path.PathProxy
 import java.lang.RuntimeException
-import java.util.function.Predicate
 
 class MoreParser : Parser {
     override fun parse(command: String): Command {
@@ -19,6 +18,6 @@ class MoreParser : Parser {
         val destination: String = splitCommand[1]
 
         return MoreCommand("more",
-            destination)
+            PathProxy(Path(destination)))
     }
 }

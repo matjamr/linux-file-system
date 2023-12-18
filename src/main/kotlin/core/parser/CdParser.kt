@@ -1,10 +1,11 @@
 package core.parser
 
-import model.command.CdCommand
+import model.command.cd.CdCommand
 import model.command.Command
 import model.command.SupportedCommands.CD
+import model.path.Path
+import model.path.PathProxy
 import java.lang.RuntimeException
-import java.util.function.Predicate
 
 class CdParser : Parser {
     override fun parse(command: String): Command {
@@ -18,6 +19,7 @@ class CdParser : Parser {
         val destination: String = splitCommand[1]
 
         return CdCommand(CD.commandName,
-            destination)
+            PathProxy(Path(destination))
+        )
     }
 }

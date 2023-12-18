@@ -5,6 +5,7 @@ import model.context.Context
 import model.node.Catalog
 import model.node.File
 import model.node.INode
+import java.lang.ClassCastException
 import java.util.*
 import java.util.function.Supplier
 
@@ -39,8 +40,13 @@ class PathResolver2 {
     }
 
     private fun getNextNode(tmpNode: INode, currentPath: String, provider: Provider): INode {
-        var ret = (tmpNode as Catalog)
-            .findByName(currentPath)
+        val ret: Optional<INode>
+        try {
+            ret = (tmpNode as Catalog)
+                .findByName(currentPath)
+        } catch (e:  ClassCastException) {
+            throw RuntimeException("Cannot enter given path")
+        }
 
         return if (ret.isPresent) {
             ret.get()

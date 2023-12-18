@@ -6,14 +6,24 @@ import core.util.InvalidPathProvider
 import model.context.Context
 import model.command.cd.CdCommand
 import model.command.Command
+import model.node.File
+import model.node.INode
 
-class CdInvoker(
+class CdProxy(
+    private val cdInvoker: CdInvoker,
     private val pathResolver: PathResolver2
 ): Invoker {
 
     override fun run(command: Command, context: Context) {
         val cdCommand: CdCommand = command as CdCommand
 
-        context.currentNode = pathResolver.resolve(cdCommand.dest.getPath(), context, InvalidPathProvider())
+
+
+        var node: INode = pathResolver.resolve(cdCommand.dest.getPath(), context, InvalidPathProvider())
+
+        if(node is File)
+            throw RuntimeException("Cannot cd file")
+
+        cdInvoker.run(command, context)
     }
 }
